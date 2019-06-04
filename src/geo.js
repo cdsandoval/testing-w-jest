@@ -1,13 +1,13 @@
-import fetch from "../__mock__/isomorphic-geo";
+import getCurrentPosition from "../__mock__/isomorphic-geo";
 
-async function geoAPI(resource, id = null) {
-  const BASE_URL = "https://jsonplaceholder.typicode.com/";
-  let url = BASE_URL + resource;
-  if (id) {
-    url += `/${id}`;
+async function geoLocationAPI(resource = null) {
+  let BASE_URL = "pos.coords";
+  if (resource) {
+    BASE_URL = `${BASE_URL}.${resource}`;
   }
-  const response = await fetch(url);
+
+  const response = await getCurrentPosition(BASE_URL);
   return await response.json();
 }
 
-export default geoAPI;
+export default geoLocationAPI;
